@@ -109,36 +109,3 @@ Creerai una piccola applicazione console che simula un sistema di prenotazione d
 * Modifica `BookingManager` per dipendere sia da `ITicketService` che da `IEmailService`.
 * Aggiorna il container per supportare più dipendenze.
 
-Spero questa trascrizione ti sia utile.
-
-# Diagrammi
-
-```mermaid
-classDiagram
-    class ITicketService {
-        <<interface>>
-        +BookTicket(string userName, string eventName)
-    }
-    class TicketService {
-        +BookTicket(string userName, string eventName)
-    }
-    class ServiceContainer {
-        -Dictionary~Type, Func~object~~ _services
-        +Register~TInterface, TImplementation~()
-        +GetService~T~()
-    }
-    class BookingManager {
-        -ITicketService _ticketService
-        +BookingManager(ITicketService ticketService)
-        +ProcessBooking(string userName, string eventName)
-    }
-    class Program {
-        +Main(string[] args)
-    }
-
-    ITicketService <|-- TicketService
-    ServiceContainer --> ITicketService
-    BookingManager --> ITicketService
-    Program --> ServiceContainer
-    Program --> BookingManager
-```
